@@ -1,56 +1,35 @@
-// 1. ระบบเมนู Profile
+// เปิด-ปิดเมนู Dropdown
 function toggleUserMenu() {
     const dropdown = document.getElementById("userDropdown");
-    dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
-}
+    const status = document.getElementById("userStatusText").innerText;
 
-// 2. ระบบเปิด/ปิดหน้า Login
-document.getElementById('userBtn').onclick = function(e) {
-    const status = document.getElementById('userStatus').innerText;
-    if(status === "เข้าสู่ระบบ") {
+    if (status === "เข้าสู่ระบบ") {
         document.getElementById('loginModal').style.display = 'flex';
     } else {
-        toggleUserMenu();
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
     }
-    e.stopPropagation();
 }
 
 function closeLogin() {
     document.getElementById('loginModal').style.display = 'none';
 }
 
-// 3. ระบบ Google Login (ใช้งานจริง)
+// ระบบ Google Login
 function handleCredentialResponse(response) {
-    // ถอดรหัสข้อมูลจาก Google
-    const responsePayload = parseJwt(response.credential);
-    
-    console.log("ID: " + responsePayload.sub);
-    console.log('Full Name: ' + responsePayload.name);
-    console.log('Email: ' + responsePayload.email);
-    
-    // อัปเดตหน้าเว็บหลังล็อกอินสำเร็จ
-    document.getElementById('userStatus').innerText = "โปรไฟล์";
-    document.getElementById('displayName').innerText = responsePayload.name;
+    const payload = JSON.parse(atob(response.credential.split('.')[1]));
+    document.getElementById("userStatusText").innerText = "โปรไฟล์";
+    document.getElementById("userName").innerText = payload.name;
     document.getElementById('loginModal').style.display = 'none';
-    alert("เข้าสู่ระบบสำเร็จ! ยินดีต้อนรับคุณ " + responsePayload.name);
-}
-
-// ฟังก์ชันถอดรหัสข้อมูลผู้ใช้
-function parseJwt (token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-    return JSON.parse(jsonPayload);
+    alert("เข้าสู่ระบบสำเร็จ! สวัสดีคุณ " + payload.name);
 }
 
 function handleLogout() {
-    document.getElementById('userStatus').innerText = "เข้าสู่ระบบ";
-    document.getElementById("userDropdown").style.display = "none";
-    location.reload(); // รีเฟรชหน้าเว็บ
+    location.reload();
 }
 
-window.onclick = function(event) {
-    if (event.target == document.getElementById('loginModal')) closeLogin();
+window.onclick = function(e) {
+    if (e.target == document.getElementById('loginModal')) closeLogin();
+    if (!e.target.matches('.user-btn') && !e.target.matches('.fa-user-circle')) {
+        document.getElementById("userDropdown").style.display = "none";
+    }
 }
