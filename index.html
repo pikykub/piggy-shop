@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piggy Shop Ultimate</title>
+    <style>
+        body { background-color: #0d0d15; color: white; font-family: 'Kanit', sans-serif; margin: 0; text-align: center; overflow-x: hidden; }
+        .banner { width: 100%; height: 180px; background: linear-gradient(to bottom, #1a1a2e, #0d0d15), url('https://via.placeholder.com/800x200'); background-size: cover; border-bottom: 2px solid #ffd700; }
+        
+        /* ยศแอดมินสีทองไล่ระดับ (ข้อ 12) */
+        .admin-badge {
+            font-size: 22px; font-weight: bold;
+            background: linear-gradient(45deg, #FFD700, #FFF5B7, #FFD700);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+        }
+
+        .card { background: #161625; border: 1px solid #333; border-radius: 15px; margin: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        button { background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); border: none; padding: 12px 25px; color: white; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; margin: 5px 0; }
+        
+        /* เอฟเฟกต์หิมะ (ข้อ 5) */
+        #snow-canvas { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99; }
+    </style>
+</head>
+<body>
+    <canvas id="snow-canvas"></canvas>
+
+    <div class="banner"></div>
+
+    <div class="card">
+        <div class="admin-badge">● แอดมิน Loma (Peach)</div>
+        <p>ยินดีต้อนรับสู่ Piggy Shop แพลตฟอร์มปล่อยเช่าเว็บ</p>
+    </div>
+
+    <div class="card">
+        <h3>ราคาเช่าเว็บไซต์ (ข้อ 6)</h3>
+        <p>7 วัน | 30 วัน | 90 วัน</p>
+        <button onclick="checkPrice()">กดลองดูหน้าเว็บ (ข้อ 1)</button>
+        <button style="background: #28a745;" onclick="contactAdmin()">คุยกับแอดมิน (ข้อ 3)</button>
+    </div>
+
+    <script>
+        // ระบบหิมะ (เลือกสีได้ในโค้ด)
+        const canvas = document.getElementById('snow-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let flakes = [];
+        for(let i = 0; i < 70; i++) { flakes.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*3+1, d: Math.random()*1 }); }
+        
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "white"; // เปลี่ยนสีหิมะตรงนี้ (ข้อ 5)
+            ctx.beginPath();
+            flakes.forEach(f => {
+                ctx.moveTo(f.x, f.y); ctx.arc(f.x, f.y, f.r, 0, Math.PI*2);
+                f.y += f.d + 0.5; if(f.y > canvas.height) f.y = -10;
+            });
+            ctx.fill(); requestAnimationFrame(draw);
+        }
+        draw();
+
+        function checkPrice() { alert("ระบบกำลังสร้างหน้าเว็บตัวอย่างให้คุณดู..."); }
+        function contactAdmin() { alert("กำลังเชื่อมต่อแชทกับแอดมิน..."); }
+    </script>
+</body>
+</html>
