@@ -3,197 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piggy Shop Ultimate - ปล่อยเช่าเว็บ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        /* --- ตัวแปรสีและพื้นฐาน --- */
-        :root {
-            --bg-color: #0b0b12;
-            --text-color: #ffffff;
-            --card-bg: #12121a;
-            --border-color: #1a1a25;
-            --gold-grad: linear-gradient(90deg, #FFD700 0%, #FFF5B7 50%, #FFD700 100%);
-        }
-
-        body { 
-            margin: 0; 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-            font-family: 'Kanit', sans-serif; 
-            transition: 0.3s;
-        }
-
-        .gold-gradient {
-            background: var(--gold-grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* --- Header --- */
-        .header { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 15px 20px; background-color: rgba(8, 8, 12, 0.9); 
-            border-bottom: 1px solid var(--border-color); 
-            position: sticky; top: 0; z-index: 100;
-        }
-        .logo { font-size: 20px; font-weight: 700; }
-        .header-icons { display: flex; gap: 15px; align-items: center; }
-        .icon-btn { cursor: pointer; padding: 5px 10px; border-radius: 8px; font-size: 14px; background: rgba(255,255,255,0.05); }
-
-        /* --- Hero Section --- */
-        .hero { padding: 40px 20px; text-align: left; background: linear-gradient(180deg, #0d0d15 0%, #0b0b12 100%); }
-        .hero-title { font-size: 26px; font-weight: 700; margin-bottom: 10px; }
-        .hero-btn { 
-            display: inline-block; padding: 12px 25px; 
-            background: var(--gold-grad); color: #111; 
-            border-radius: 8px; font-weight: 700; margin-top: 15px;
-        }
-
-        /* --- Product Grid --- */
-        .section-title { padding: 20px; font-size: 18px; font-weight: 700; }
-        .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 0 15px 30px; }
-        .product-card { 
-            background-color: var(--card-bg); border-radius: 12px; 
-            overflow: hidden; border: 1px solid var(--border-color); 
-            position: relative; transition: 0.3s;
-        }
-        .product-img { width: 100%; height: 150px; object-fit: cover; background: #222; }
-        .product-info { padding: 12px; }
-        .product-name { font-size: 14px; margin-bottom: 10px; height: 40px; overflow: hidden; }
-        .product-price { font-size: 16px; font-weight: 700; }
-        .rent-btn { 
-            display: block; width: 100%; text-align: center; padding: 8px 0; 
-            background: var(--gold-grad); color: #111; 
-            border-radius: 6px; font-weight: 700; margin-top: 10px; font-size: 13px;
-        }
-
-        /* --- Modal หน้า Login/สมัครสมาชิก --- */
-        .modal {
-            display: none; position: fixed; top: 0; left: 0; 
-            width: 100%; height: 100%; background: rgba(0,0,0,0.85); 
-            z-index: 1000; align-items: center; justify-content: center;
-        }
-        .modal-content { 
-            background: var(--card-bg); width: 85%; max-width: 380px; 
-            padding: 30px 20px; border-radius: 20px; border: 1px solid #333; 
-            text-align: center; position: relative;
-        }
-        .close-modal { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 20px; }
-        .input-group { margin-bottom: 15px; text-align: left; }
-        input { 
-            width: 100%; padding: 12px; margin-top: 5px; box-sizing: border-box;
-            border-radius: 8px; border: 1px solid #333; background: #000; color: #fff; 
-        }
-        .google-btn {
-            width: 100%; padding: 12px; border-radius: 8px; border: none; 
-            background: white; color: black; font-weight: 700;
-            display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer;
-            margin-bottom: 20px;
-        }
-
-        /* --- Light Mode Styles --- */
-        body.light-mode {
-            --bg-color: #ffffff;
-            --text-color: #111111;
-            --card-bg: #f8f8f8;
-            --border-color: #e0e0e0;
-        }
-        body.light-mode input { background: #fff; color: #000; border: 1px solid #ccc; }
-    </style>
+    <title>Piggy Shop Ultimate</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
-<body id="main-body">
+<body>
 
-    <div class="header">
+    <header class="header">
         <div class="logo">Piggy-<span class="gold-gradient">Shop</span></div>
-        <div class="header-icons">
-            <div class="icon-btn" onclick="toggleTheme()" id="theme-btn">☀️ โหมดสว่าง</div>
-            <div class="icon-btn" onclick="openLogin()">👨‍💼 เข้าสู่ระบบ</div>
+        <div class="header-right">
+            <div class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <div class="user-menu-container">
+                <button class="user-btn" onclick="toggleUserMenu()">
+                    <i class="fa-solid fa-user-circle"></i> เข้าสู่ระบบ
+                </button>
+                <div id="userDropdown" class="dropdown-content">
+                    <div class="dropdown-header">โปรดอ่าน: MEMBER</div>
+                    <div class="balance">ยอดเงิน: ฿0.00</div>
+                    <hr>
+                    <a href="#"><i class="fa-solid fa-gears"></i> จัดการหลังบ้าน</a>
+                    <a href="#"><i class="fa-solid fa-user-pen"></i> จัดการโปรไฟล์</a>
+                    <a href="#"><i class="fa-solid fa-cart-shopping"></i> สถานะคำสั่งซื้อ</a>
+                    <a href="#"><i class="fa-solid fa-wallet"></i> เติมเงิน</a>
+                    <a href="#" class="logout"><i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ</a>
+                </div>
+            </div>
         </div>
-    </div>
+    </header>
 
-    <div class="hero">
-        <div class="hero-title">ยินดีต้อนรับสู่ <span class="gold-gradient">Piggy Shop</span></div>
-        <div class="hero-desc">เลือกเช่าเว็บไซต์ที่คุณต้องการ ระบบอัตโนมัติ 24 ชม.</div>
-        <a href="#products" class="hero-btn">ดูรายการเว็บว่าง</a>
-    </div>
+    <section class="banner-section">
+        <div class="promotion-banner">
+            <div class="promo-content">
+                <span class="badge">โปรโมชั่นพิเศษ</span>
+                <h2>เช่า 3 เดือน แถมฟรี 1 เดือน!</h2>
+            </div>
+            <div class="promo-icon"><i class="fa-solid fa-gift"></i></div>
+        </div>
+    </section>
 
-    <div id="products">
-        <div class="section-title">เว็บไซต์ยอดนิยม</div>
+    <main class="container">
+        <h3 class="section-title">เว็บไซต์ยอดนิยม <small>ดูทั้งหมด ></small></h3>
         <div class="product-grid">
             <div class="product-card">
-                <img src="https://via.placeholder.com/300x200/222/FFD700?text=E-Commerce" class="product-img">
+                <div class="badge-best">Best Seller</div>
+                <div class="product-thumb"><i class="fa-solid fa-image"></i></div>
                 <div class="product-info">
-                    <div class="product-name">เว็บขายของออนไลน์ V.1</div>
-                    <div class="product-price gold-gradient">฿69.00</div>
-                    <a href="#" class="rent-btn">สั่งซื้อเช่าเว็บ</a>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://via.placeholder.com/300x200/222/FFF5B7?text=Portfolio" class="product-img">
-                <div class="product-info">
-                    <div class="product-name">เว็บพอร์ตฟอลิโอ สวยงาม</div>
-                    <div class="product-price gold-gradient">฿40.00</div>
-                    <a href="#" class="rent-btn">สั่งซื้อเช่าเว็บ</a>
+                    <h4>เว็บขายของออนไลน์ (E-commerce)</h4>
+                    <div class="price-row">
+                        <span class="old-price">฿9,999</span>
+                        <span class="new-price">฿69.00</span>
+                    </div>
+                    <button class="buy-btn">สั่งซื้อเช่าเว็บ</button>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <div id="loginModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeLogin()">✕</span>
-            <h2 class="gold-gradient" style="margin-top:0;">บัญชีผู้ใช้งาน</h2>
+            <span class="close-btn" onclick="closeLogin()">&times;</span>
+            <h2>เข้าสู่ระบบ</h2>
+            <p>กรุณาเข้าสู่ระบบเพื่อใช้งานต่อ</p>
             
-            <button class="google-btn" onclick="alert('กำลังเชื่อมต่อระบบ Google...')">
-                <img src="https://www.google.com/favicon.ico" width="18"> สมัครด้วย Google
-            </button>
-
-            <div style="margin-bottom: 20px; color: #888; font-size: 12px;">หรือใช้ชื่อผู้ใช้งาน</div>
-
             <div class="input-group">
-                <input type="text" id="username" placeholder="ชื่อผู้ใช้งาน (Username)">
+                <label>ชื่อผู้ใช้ หรือ อีเมล</label>
+                <input type="text" placeholder="username หรือ user@gmail.com">
             </div>
             <div class="input-group">
-                <input type="password" id="password" placeholder="รหัสผ่าน">
+                <label>รหัสผ่าน</label>
+                <input type="password" placeholder="password">
             </div>
             
-            <button class="hero-btn" style="width:100%; border:none; cursor:pointer;" onclick="alert('สร้างบัญชีสำเร็จ!')">
-                สร้างบัญชี / เข้าสู่ระบบ
-            </button>
+            <button class="main-login-btn"><i class="fa-solid fa-shield-halved"></i> เข้าสู่ระบบ</button>
+            
+            <div class="separator">หรือ</div>
+            
+            <button class="social-btn discord"><i class="fa-brands fa-discord"></i> เข้าสู่ระบบด้วย Discord</button>
+            <button class="social-btn google"><i class="fa-brands fa-google"></i> เข้าสู่ระบบด้วย Google</button>
+            
+            <p class="register-link">ยังไม่มีบัญชี? <a href="#">สมัครสมาชิก</a></p>
         </div>
     </div>
 
-    <script>
-        // 1. ระบบสลับโหมดสี (Light/Dark)
-        function toggleTheme() {
-            const body = document.getElementById('main-body');
-            const btn = document.getElementById('theme-btn');
-            
-            body.classList.toggle('light-mode');
-            
-            if (body.classList.contains('light-mode')) {
-                btn.innerHTML = "🌙 โหมดมืด";
-            } else {
-                btn.innerHTML = "☀️ โหมดสว่าง";
-            }
-        }
-
-        // 2. ระบบเปิด-ปิด Modal
-        function openLogin() {
-            document.getElementById('loginModal').style.display = 'flex';
-        }
-
-        function closeLogin() {
-            document.getElementById('loginModal').style.display = 'none';
-        }
-
-        // ปิด Modal เมื่อคลิกพื้นหลังข้างนอก
-        window.onclick = function(event) {
-            let modal = document.getElementById('loginModal');
-            if (event.target == modal) {
-                closeLogin();
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
