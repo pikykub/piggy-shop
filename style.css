@@ -1,68 +1,40 @@
 :root {
-    --main-bg: #050508;
-    --card-bg: #11111a;
-    --gold-primary: #FFD700;
-    --gold-light: #FFF5B7;
-    --accent: #1e1e2e;
+    --black: #050508;
+    --dark-grey: #11111a;
+    --gold: #FFD700;
+    --white: #ffffff;
 }
 
-body {
-    background-color: var(--main-bg);
-    color: #fff;
-    font-family: 'Kanit', sans-serif;
-    margin: 0;
-    overflow-x: hidden;
-}
+body { background: var(--black); color: var(--white); font-family: 'Kanit', sans-serif; margin: 0; }
 
 .gold-gradient {
-    background: linear-gradient(90deg, var(--gold-primary), var(--gold-light), var(--gold-primary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background: linear-gradient(90deg, #d4af37, #fdf5e6, #d4af37);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    font-weight: bold;
 }
 
-/* Header */
-.header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 15px 6%; background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(10px); border-bottom: 1px solid #1a1a25;
-    position: sticky; top: 0; z-index: 1000;
-}
-
-/* Hero Banner */
-.hero-banner { padding: 30px 6%; }
-.banner-wrapper {
-    background: linear-gradient(135deg, #11111a 0%, #050508 100%);
-    border: 1px solid #222; border-radius: 20px; padding: 50px;
-    position: relative; overflow: hidden;
-}
-
-/* Dropdown */
+/* Header & Dropdown */
+.header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: rgba(0,0,0,0.9); border-bottom: 1px solid #222; sticky: top; z-index: 100; }
+.user-menu-container { position: relative; }
 .dropdown-content {
     display: none; position: absolute; right: 0; top: 50px;
-    background: #11111a; min-width: 240px; border-radius: 12px;
-    border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    background: #0d0d12; min-width: 220px; border-radius: 12px;
+    border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden;
 }
-.dropdown-content a {
-    padding: 12px 20px; display: block; color: #ccc; text-decoration: none;
+.dropdown-content a, .dropdown-header, .balance { padding: 12px 20px; display: block; color: #fff; text-decoration: none; font-size: 14px; }
+.dropdown-content a:hover { background: #1a1a25; }
+
+/* Banner */
+.hero-section { padding: 20px 5%; }
+.main-banner {
+    height: 350px; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1200x400/1a1a25/ffd700?text=PIGGY+SHOP+ULTIMATE');
+    background-size: cover; border-radius: 20px; border: 1px solid #333; display: flex; align-items: center; padding: 0 50px;
 }
-.dropdown-content a:hover { background: #1a1a25; color: var(--gold-primary); }
 
 /* Modal */
-.modal { 
-    display: none; position: fixed; z-index: 9999; top: 0; left: 0; 
-    width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center;
-}
-.modal-content { 
-    background: #0d0d12; padding: 40px; border-radius: 25px; 
-    width: 90%; max-width: 420px; border: 1px solid #222;
-}
-
-/* Button & Form */
-input {
-    width: 100%; padding: 14px; border-radius: 10px; border: 1px solid #222;
-    background: #000; color: #fff; margin-top: 8px; box-sizing: border-box;
-}
-.login-submit-btn {
-    width: 100%; padding: 14px; background: #fff; color: #000;
-    border: none; border-radius: 10px; font-weight: bold; margin-top: 20px; cursor: pointer;
-}
+.modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
+.modal-content { background: #0d0d12; padding: 40px; border-radius: 20px; width: 90%; max-width: 400px; border: 1px solid #333; text-align: center; }
+input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #000; color: #fff; margin-top: 5px; box-sizing: border-box; }
+.btn-login-main { width: 100%; padding: 12px; background: #fff; color: #000; border: none; border-radius: 8px; font-weight: bold; margin-top: 20px; cursor: pointer; }
+.separator { margin: 20px 0; color: #555; font-size: 12px; border-bottom: 1px solid #222; line-height: 0.1em; }
+.separator span { background: #0d0d12; padding: 0 10px; }
