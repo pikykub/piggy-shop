@@ -16,14 +16,17 @@
         <div class="header-right">
             <div class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></div>
             <div class="user-menu-container">
-                <button class="user-btn" id="userBtn" onclick="toggleUserMenu()">
-                    <i class="fa-solid fa-user-circle"></i> <span id="userStatus">เข้าสู่ระบบ</span>
+                <button class="user-btn" onclick="toggleUserMenu()">
+                    <i class="fa-solid fa-user-circle"></i> <span id="userStatusText">เข้าสู่ระบบ</span>
                 </button>
+                
                 <div id="userDropdown" class="dropdown-content">
-                    <div class="dropdown-header" id="displayName">MEMBER</div>
+                    <div class="dropdown-header">MEMBER: <span id="userName">Guest</span></div>
                     <div class="balance">ยอดเงิน: ฿0.00</div>
                     <hr>
                     <a href="#"><i class="fa-solid fa-gears"></i> จัดการหลังบ้าน</a>
+                    <a href="#"><i class="fa-solid fa-user-pen"></i> จัดการโปรไฟล์</a>
+                    <a href="#"><i class="fa-solid fa-cart-shopping"></i> สถานะคำสั่งซื้อ</a>
                     <a href="#"><i class="fa-solid fa-wallet"></i> เติมเงิน</a>
                     <a href="javascript:void(0)" onclick="handleLogout()" class="logout"><i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ</a>
                 </div>
@@ -31,31 +34,26 @@
         </div>
     </header>
 
-    <section class="hero-banner">
-        <div class="banner-wrapper">
+    <section class="hero-section">
+        <div class="main-banner">
             <div class="banner-content">
-                <div class="badge-promo">NEW ARRIVAL</div>
+                <span class="promo-badge">NEW UPDATE</span>
                 <h1 class="gold-gradient">PIGGY SHOP ULTIMATE</h1>
-                <p>ระบบปล่อยเช่าเว็บไซต์ที่เร็วที่สุด ปลอดภัย และราคาถูกที่สุดในไทย</p>
-                <button class="hero-action-btn">เริ่มใช้งานเลย</button>
+                <p>ระบบเช่าเว็บไซต์อัตโนมัติ ดีไซน์พรีเมียมที่สุดในตอนนี้</p>
+                <button class="btn-shop">เริ่มช้อปเลย</button>
             </div>
         </div>
     </section>
 
     <main class="container">
-        <div class="section-header">
-            <h3><i class="fa-solid fa-fire" style="color: #ff5252;"></i> เว็บไซต์แนะนำ</h3>
-            <a href="#" class="view-all">ดูทั้งหมด <i class="fa-solid fa-chevron-right"></i></a>
-        </div>
+        <h3 class="section-title">สินค้าแนะนำ</h3>
         <div class="product-grid">
             <div class="product-card">
-                <div class="product-img-box">
-                    <img src="https://via.placeholder.com/350x200/1a1a25/ffd700?text=Shop+System+V.1" alt="Web">
-                </div>
-                <div class="product-detail">
-                    <h4>Shop System อัตโนมัติ</h4>
-                    <div class="price-tag">฿69.00 <small>/ เดือน</small></div>
-                    <button class="buy-btn">เช่าเว็บไซต์นี้</button>
+                <div class="p-img"><i class="fa-solid fa-code"></i></div>
+                <div class="p-detail">
+                    <h4>Web Shop Auto V1</h4>
+                    <div class="p-price"><span class="gold-gradient">฿69.00</span></div>
+                    <button class="btn-rent">เช่าใช้งาน</button>
                 </div>
             </div>
         </div>
@@ -63,31 +61,28 @@
 
     <div id="loginModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeLogin()">&times;</span>
-            <div class="login-header">
+            <span class="close-modal" onclick="closeLogin()">&times;</span>
+            <div class="modal-header">
                 <h2>เข้าสู่ระบบ</h2>
-                <p>ยินดีต้อนรับกลับมาที่ Piggy Shop</p>
+                <p>ยินดีต้อนรับสู่ Piggy Shop</p>
             </div>
-            
-            <div id="g_id_onload"
-                 data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
-                 data-callback="handleCredentialResponse">
-            </div>
-            <div class="g_id_signin" data-type="standard"></div>
 
-            <div class="divider"><span>หรือเข้าสู่ระบบด้วยชื่อผู้ใช้</span></div>
+            <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID" data-callback="handleCredentialResponse"></div>
+            <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left"></div>
 
-            <div class="form-group">
-                <label><i class="fa-solid fa-user"></i> ชื่อผู้ใช้งาน</label>
-                <input type="text" id="loginUser" placeholder="Username">
+            <div class="separator"><span>หรือ</span></div>
+
+            <div class="input-group">
+                <label>ชื่อผู้ใช้งาน</label>
+                <input type="text" placeholder="Username">
             </div>
-            <div class="form-group">
-                <label><i class="fa-solid fa-lock"></i> รหัสผ่าน</label>
-                <input type="password" id="loginPass" placeholder="Password">
+            <div class="input-group">
+                <label>รหัสผ่าน</label>
+                <input type="password" placeholder="Password">
             </div>
-            
-            <button class="login-submit-btn">เข้าสู่ระบบ</button>
-            <p class="reg-text">ยังไม่เป็นสมาชิก? <a href="#">สมัครสมาชิกที่นี่</a></p>
+
+            <button class="btn-login-main">เข้าสู่ระบบ</button>
+            <p class="reg-link">ยังไม่มีบัญชี? <a href="#">สมัครสมาชิก</a></p>
         </div>
     </div>
 
