@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
@@ -15,46 +16,46 @@
         <div class="header-right">
             <div class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></div>
             <div class="user-menu-container">
-                <button class="user-btn" onclick="toggleUserMenu()">
-                    <i class="fa-solid fa-user-circle"></i> เข้าสู่ระบบ
+                <button class="user-btn" id="userBtn" onclick="toggleUserMenu()">
+                    <i class="fa-solid fa-user-circle"></i> <span id="userStatus">เข้าสู่ระบบ</span>
                 </button>
                 <div id="userDropdown" class="dropdown-content">
-                    <div class="dropdown-header">โปรดอ่าน: MEMBER</div>
+                    <div class="dropdown-header" id="displayName">MEMBER</div>
                     <div class="balance">ยอดเงิน: ฿0.00</div>
                     <hr>
                     <a href="#"><i class="fa-solid fa-gears"></i> จัดการหลังบ้าน</a>
-                    <a href="#"><i class="fa-solid fa-user-pen"></i> จัดการโปรไฟล์</a>
-                    <a href="#"><i class="fa-solid fa-cart-shopping"></i> สถานะคำสั่งซื้อ</a>
                     <a href="#"><i class="fa-solid fa-wallet"></i> เติมเงิน</a>
-                    <a href="#" class="logout"><i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ</a>
+                    <a href="javascript:void(0)" onclick="handleLogout()" class="logout"><i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <section class="banner-section">
-        <div class="promotion-banner">
-            <div class="promo-content">
-                <span class="badge">โปรโมชั่นพิเศษ</span>
-                <h2>เช่า 3 เดือน แถมฟรี 1 เดือน!</h2>
+    <section class="hero-banner">
+        <div class="banner-wrapper">
+            <div class="banner-content">
+                <div class="badge-promo">NEW ARRIVAL</div>
+                <h1 class="gold-gradient">PIGGY SHOP ULTIMATE</h1>
+                <p>ระบบปล่อยเช่าเว็บไซต์ที่เร็วที่สุด ปลอดภัย และราคาถูกที่สุดในไทย</p>
+                <button class="hero-action-btn">เริ่มใช้งานเลย</button>
             </div>
-            <div class="promo-icon"><i class="fa-solid fa-gift"></i></div>
         </div>
     </section>
 
     <main class="container">
-        <h3 class="section-title">เว็บไซต์ยอดนิยม <small>ดูทั้งหมด ></small></h3>
+        <div class="section-header">
+            <h3><i class="fa-solid fa-fire" style="color: #ff5252;"></i> เว็บไซต์แนะนำ</h3>
+            <a href="#" class="view-all">ดูทั้งหมด <i class="fa-solid fa-chevron-right"></i></a>
+        </div>
         <div class="product-grid">
             <div class="product-card">
-                <div class="badge-best">Best Seller</div>
-                <div class="product-thumb"><i class="fa-solid fa-image"></i></div>
-                <div class="product-info">
-                    <h4>เว็บขายของออนไลน์ (E-commerce)</h4>
-                    <div class="price-row">
-                        <span class="old-price">฿9,999</span>
-                        <span class="new-price">฿69.00</span>
-                    </div>
-                    <button class="buy-btn">สั่งซื้อเช่าเว็บ</button>
+                <div class="product-img-box">
+                    <img src="https://via.placeholder.com/350x200/1a1a25/ffd700?text=Shop+System+V.1" alt="Web">
+                </div>
+                <div class="product-detail">
+                    <h4>Shop System อัตโนมัติ</h4>
+                    <div class="price-tag">฿69.00 <small>/ เดือน</small></div>
+                    <button class="buy-btn">เช่าเว็บไซต์นี้</button>
                 </div>
             </div>
         </div>
@@ -63,26 +64,30 @@
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeLogin()">&times;</span>
-            <h2>เข้าสู่ระบบ</h2>
-            <p>กรุณาเข้าสู่ระบบเพื่อใช้งานต่อ</p>
-            
-            <div class="input-group">
-                <label>ชื่อผู้ใช้ หรือ อีเมล</label>
-                <input type="text" placeholder="username หรือ user@gmail.com">
-            </div>
-            <div class="input-group">
-                <label>รหัสผ่าน</label>
-                <input type="password" placeholder="password">
+            <div class="login-header">
+                <h2>เข้าสู่ระบบ</h2>
+                <p>ยินดีต้อนรับกลับมาที่ Piggy Shop</p>
             </div>
             
-            <button class="main-login-btn"><i class="fa-solid fa-shield-halved"></i> เข้าสู่ระบบ</button>
+            <div id="g_id_onload"
+                 data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
+                 data-callback="handleCredentialResponse">
+            </div>
+            <div class="g_id_signin" data-type="standard"></div>
+
+            <div class="divider"><span>หรือเข้าสู่ระบบด้วยชื่อผู้ใช้</span></div>
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-user"></i> ชื่อผู้ใช้งาน</label>
+                <input type="text" id="loginUser" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label><i class="fa-solid fa-lock"></i> รหัสผ่าน</label>
+                <input type="password" id="loginPass" placeholder="Password">
+            </div>
             
-            <div class="separator">หรือ</div>
-            
-            <button class="social-btn discord"><i class="fa-brands fa-discord"></i> เข้าสู่ระบบด้วย Discord</button>
-            <button class="social-btn google"><i class="fa-brands fa-google"></i> เข้าสู่ระบบด้วย Google</button>
-            
-            <p class="register-link">ยังไม่มีบัญชี? <a href="#">สมัครสมาชิก</a></p>
+            <button class="login-submit-btn">เข้าสู่ระบบ</button>
+            <p class="reg-text">ยังไม่เป็นสมาชิก? <a href="#">สมัครสมาชิกที่นี่</a></p>
         </div>
     </div>
 
